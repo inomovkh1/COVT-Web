@@ -1,0 +1,28 @@
+﻿@model IEnumerable<COVT_Web.Models.ViewModel.StatsionarView>
+<table class="content-table">
+    <thead>
+        <tr>
+            <th>ФИО</th>
+            <th>Дата приема</th>
+            <th>#</th>
+            <th>#</th>
+        </tr>
+    </thead>
+    <tbody id="searchResults">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.fio</td>
+                <td>@item.data_postupleniya</td>
+                <td>
+                    <a asp-action="KartaStView" asp-controller="Statsionar" asp-route-id="@item.id_karti">Смотреть</a>
+                </td>
+                <td>
+                    <form asp-controller="Statsionar" asp-action="Delete" method="post" asp-route-id="@item.id_karti">
+                        <input type="submit" value="Удалить" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

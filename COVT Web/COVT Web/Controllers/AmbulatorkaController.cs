@@ -82,7 +82,7 @@ namespace COVT_Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> KartaAmview(KartaAmView model, int id)
+        public async Task<IActionResult> KartaAmView(KartaAmView model, int id)
         {
                 var ambulatorka = db.karta_patsienta.Find(id);
                 ambulatorka.zhalobi = model.zhalobi;
