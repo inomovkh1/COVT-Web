@@ -1,0 +1,28 @@
+﻿@model IEnumerable<COVT_Web.Models.ViewModel.AmbulatorkaView>
+<table class="content-table">
+    <thead>
+        <tr>
+            <th>ФИО</th>
+            <th>Дата приема</th>
+            <th>#</th>
+            <th>#</th>
+        </tr>
+    </thead>
+    <tbody id="searchResults">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.fio</td>
+                <td>@item.data_priema</td>
+                <td>
+                    <a asp-action="KartaAmView" asp-controller="Ambulatorka" asp-route-id="@item.id_karti_patsienta">Смотреть</a>
+                </td>
+                <td>
+                    <form asp-controller="Ambulatorka" asp-action="Delete" method="post" asp-route-id="@item.id_karti_patsienta">
+                        <input type="submit" value="Удалить" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

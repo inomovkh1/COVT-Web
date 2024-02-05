@@ -1,0 +1,114 @@
+﻿body 
+{
+    /*display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;*/
+    background: darkslategray;
+    font-family: 'Century Gothic';
+    font-size: 16px;   
+    
+}
+
+/*.container
+{
+    width: 680px;
+}
+
+.entryarea
+{
+    position: relative;
+    height: 80px;
+    line-height: 80px;
+}
+
+input {
+    position: absolute;
+    width: 100%;
+    outline: none;
+    font-size: 2.2em;
+    padding: 0 30px;
+    line-height: 80px;
+    border-radius: 10px;
+    border: 2px solid #f0ffff;
+    background: transparent;
+    transition: 0.1s ease;
+    z-index: 1111;
+}
+
+.labelline
+{
+    position: absolute;
+    font-size: 1.6em;
+    color: #f0ffff;
+    padding: 0 25px;
+    margin: 020px;
+    background-color: darkslategray;
+    transition: 0.2s ease;
+}
+
+input:focus + .labelline, 
+input:valid + .labelline
+{
+    color: cadetblue;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 12px;
+    transform: translate(-15px, -16px) scale(0.88);
+    z-index: 1111;
+
+}*/
+
+label
+{
+    color: white;
+}
+
+.content-table 
+{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 20px 20px 20px 20px;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+}
+
+.content-table thead tr 
+{
+    background-color: cadetblue;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+}
+
+.content-table th, .content-table td 
+{
+    padding: 12px 15px;
+}
+
+.content-table tbody tr 
+{
+    background-color: white;
+    border-bottom: 1px solid #dddddd;
+    text-align: center;
+}
+
+.content-table tbody tr:nth-of-type(even) 
+{
+    background-color: #f3f3f3;
+}
+
+.content-table tbody tr:last-of-type 
+{
+    border-bottom: 6px solid cadetblue;
+}
+
+.content-table tbody tr.active-row 
+{
+    font-weight: bold;
+    color: cadetblue;
+}
+        

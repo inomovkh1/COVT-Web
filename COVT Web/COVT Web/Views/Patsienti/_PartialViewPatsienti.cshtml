@@ -1,0 +1,35 @@
+﻿@model IEnumerable<COVT_Web.Models.DB.PatsientiDb>
+
+<table class="content-table">
+    <thead>
+        <tr>
+            <th>ФИО</th>
+            <th>Дата рождения</th>
+            <th>Наличие операции</th>
+            <th>Телефон</th>
+            <th>Адрес</th>
+            <th>#</th>
+            <th>#</th>
+        </tr>
+    </thead>
+    <tbody id="searchResults">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.familiya</td>
+                <td>@item.data_rozhdeniya</td>
+                <td>@item.nalichie_operatsii</td>
+                <td>@item.telefon</td>
+                <td>@item.adres</td>
+                <td>
+                    <a asp-action="Edit" asp-controller="Patsienti" asp-route-id="@item.id_patsienta">Изменить</a>
+                </td>
+                <td>
+                    <form asp-controller="Patsienti" asp-action="Delete" method="post" asp-route-id="@item.id_patsienta">
+                        <input type="submit" value="Удалить" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

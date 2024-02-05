@@ -1,0 +1,78 @@
+﻿@model COVT_Web.Models.ViewModel.KartaAmView
+
+<head>
+    <link rel="stylesheet" href="~/css/mystile.css" />
+</head>
+<body>
+    <form asp-action="KartaAmView" asp-controller="Ambulatorka" asp-route-id="@Model.id_karti_patsienta">
+
+        <div>
+            <label>Пациент: @Model.patsient</label>
+        </div>
+
+        <div>
+            <label>Дата приёма: @Model.data_priema</label>
+        </div>
+
+        <div>
+            <label>Врач: @Model.vrach</label>
+        </div>
+
+        <div>
+            <label>Болезнь: @Model.bolezn</label>
+        </div>
+
+        <div>
+            <label>Кабинет: @Model.id_kobineta</label>
+        </div>
+
+        <div>
+            <label>Жалобы:</label>
+            <input asp-for="@Model.zhalobi" class="form-control" value="@Model.zhalobi"/>
+        </div>
+
+        <div>
+            <label>История заболевания:</label>
+            <input asp-for="@Model.ist_zab" class="form-control" value="@Model.ist_zab"/>
+        </div>
+
+        <div>
+            <label>Настоящий статус:</label>
+            <input asp-for="@Model.nast_stat" class="form-control" value="@Model.nast_stat"/>
+        </div>
+
+        <div>
+            <label>Местный статус:</label>
+            <input asp-for="@Model.mest_stat" class="form-control" value="@Model.mest_stat"/>
+        </div>
+
+        <div>
+            <label>Дополнительные методы обследования:</label>
+            <input asp-for="@Model.dop_met_obsl" class="form-control" value="@Model.dop_met_obsl"/>
+        </div>
+
+        <div>
+            <label>Диагноз:</label>
+            <input asp-for="@Model.diagnoz" class="form-control" value="@Model.diagnoz" />
+        </div>
+
+        <div>
+            <label>План обследования:</label>
+            <input asp-for="@Model.plan_obsl" class="form-control" value="@Model.plan_obsl"/>
+        </div>
+
+        <div>
+            <label>План лечения:</label>
+            <input asp-for="@Model.plan_lech" class="form-control" value="@Model.plan_lech"/>
+        </div>
+
+        <div>
+            <label>Заключение:</label>
+            <input asp-for="@Model.zakl" class="form-control" value="@Model.zakl"/>
+        </div>
+
+        <div>
+            <button type="submit" class="btn-dark">Сохранить</button>
+        </div>
+        </form>
+</body>

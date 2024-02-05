@@ -1,0 +1,73 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = COVT_Web
+build_property.RootNamespace = COVT_Web
+build_property.ProjectDir = C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Ambulatorka/Ambulatorka.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW1idWxhdG9ya2FcQW1idWxhdG9ya2EuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Ambulatorka/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW1idWxhdG9ya2FcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Ambulatorka/KartaAmView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW1idWxhdG9ya2FcS2FydGFBbVZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Ambulatorka/_PartialViewAmbulatorka.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW1idWxhdG9ya2FcX1BhcnRpYWxWaWV3QW1idWxhdG9ya2EuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Patsienti/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0c2llbnRpXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Patsienti/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0c2llbnRpXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Patsienti/Patsienti.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0c2llbnRpXFBhdHNpZW50aS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Patsienti/_PartialViewPatsienti.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0c2llbnRpXF9QYXJ0aWFsVmlld1BhdHNpZW50aS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Statsionar/Statsionar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhdHNpb25hclxTdGF0c2lvbmFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-0rvkko2ajx

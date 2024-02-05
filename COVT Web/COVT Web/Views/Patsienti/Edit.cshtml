@@ -1,0 +1,45 @@
+﻿@model COVT_Web.Models.DB.PatsientiDb
+
+<h2>Редактирование пользователя</h2>
+
+<form asp-action="edit" asp-controller="Patsienti" asp-route-id="@Model.id_patsienta">
+    <div>
+        <label>Врач:</label>
+        <input asp-for="id_vracha" class="form-control" />
+        <span asp-validation-for="id_vracha" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Фамилия:</label>
+        <input asp-for="familiya" class="form-control" />
+        <span asp-validation-for="familiya" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Дата рождения:</label>
+        <input asp-for="data_rozhdeniya" class="form-control" />
+        <span asp-validation-for="data_rozhdeniya" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Наличие операции:</label>
+        <input asp-for="nalichie_operatsii" class="form-control" />
+        <span asp-validation-for="nalichie_operatsii" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Телефон:</label>
+        <input asp-for="telefon" class="form-control" />
+        <span asp-validation-for="telefon" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Адрес:</label>
+        <input asp-for="adres" class="form-control" />
+        <span asp-validation-for="adres" class="text-danger"></span>
+    </div>
+
+    <div>
+        <input type="submit" value="Сохранить" />
+    </div>
+</form>

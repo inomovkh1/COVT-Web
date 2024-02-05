@@ -1,0 +1,48 @@
+﻿@model COVT_Web.Models.DB.PatsientiDb
+<head>
+    <link rel="stylesheet" href="~/css/mystile.css" />
+</head>
+<body>
+    <form asp-action="create" asp-controller="Patsienti" method="post">
+        <div>
+            <label>Врач:</label>
+            <select asp-for="id_vracha" asp-items="ViewBag.VrachiDB"></select>
+        </div>
+
+        <div class="container">
+            <div class="entryarea">
+                <input asp-for="familiya" type="text" required/>
+                <span asp-validation-for="familiya" class="text-danger"></span>
+                <div class="labelline">ФИО</div>
+            </div>
+        </div>
+
+        <div>
+            <label>Дата рождения:</label>
+            <input asp-for="data_rozhdeniya" class="form-control"/>
+            <span asp-validation-for="data_rozhdeniya" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label>Наличие операции:</label>
+            <input asp-for="nalichie_operatsii" class="form-control"/>
+            <span asp-validation-for="nalichie_operatsii" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label>Телефон:</label>
+            <input asp-for="telefon" class="form-control"/>
+            <span asp-validation-for="telefon" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label>Адрес:</label>
+            <input asp-for="adres" class="form-control"/>
+            <span asp-validation-for="adres" class="text-danger"></span>
+        </div>
+
+        <div>
+            <button type="submit" class="btn-dark">Добавить пациента</button>
+        </div>
+    </form>
+</body>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<COVT_Web.Models.ViewModel.AmbulatorkaView>
+
+<head>
+    <link rel="stylesheet" href="~/css/mystile.css" />
+</head>
+<body>
+    <form asp-action="Ambulatorka" method="get">
+        <div class="form-group">
+            <label for="searchInput">Поиск пациента</label>
+            <input type="text" id="searchInput" name="poisk" value="@ViewData["Poiskk"]" />
+        </div>
+    </form>
+    <a asp-controller="Ambulatorka" asp-action="Create">Добавить карту</a>
+    <div id="partialViewContainer">
+        @Html.Partial("_PartialViewAmbulatorka", Model)  
+    </div>
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>ФИО</th>
+                <th>Дата приема</th>
+                <th>#</th>
+                <th>#</th>
+            </tr>
+        </thead>
+        <tbody id="searchResults">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.fio</td>
+                    <td>@item.data_priema</td>
+                    <td>
+                        <a asp-action="KartaAmView" asp-controller="Ambulatorka" asp-route-id="@item.id_karti_patsienta">Смотреть</a>
+                    </td>
+                    <td>
+                        <form asp-controller="Ambulatorka" asp-action="Delete" method="post" asp-route-id="@item.id_karti_patsienta">
+                            <input type="submit" value="Удалить" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#searchInput').on('input', function () {
+                var poisk = $(this).val().trim();
+                $.ajax({
+                    url: '/Ambulatorka/Ambulatorka',
+                    type: 'GET',
+                    data: { poisk: poisk },
+                    success: function (result) {
+                        $('#partialViewContainer').html(result);
+                    }
+                });
+            });
+        });
+    </script>
+}
