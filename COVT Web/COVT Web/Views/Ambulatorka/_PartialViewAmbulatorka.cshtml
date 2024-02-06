@@ -6,6 +6,8 @@
             <th>Дата приема</th>
             <th>#</th>
             <th>#</th>
+            <th>#</th>
+            <th>#</th>
         </tr>
     </thead>
     <tbody id="searchResults">
@@ -16,6 +18,16 @@
                 <td>@item.data_priema</td>
                 <td>
                     <a asp-action="KartaAmView" asp-controller="Ambulatorka" asp-route-id="@item.id_karti_patsienta">Смотреть</a>
+                </td>
+                <td>
+                    <form asp-controller="Ambulatorka" asp-action="Dubl" method="post" asp-route-id="@item.id_karti_patsienta">
+                        <input type="submit" value="Дублировать" />
+                    </form>
+                </td>
+                <td>
+                    <form asp-controller="Ambulatorka" asp-action="Otpravka" method="post" asp-route-id="@item.id_karti_patsienta">
+                        <input type="submit" value="Отправить в стационар" />
+                    </form>
                 </td>
                 <td>
                     <form asp-controller="Ambulatorka" asp-action="Delete" method="post" asp-route-id="@item.id_karti_patsienta">

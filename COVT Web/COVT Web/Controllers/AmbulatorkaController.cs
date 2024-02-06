@@ -1,12 +1,17 @@
 ﻿using COVT_Web.Models;
-using COVT_Web.Models.ViewModel;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.EntityFrameworkCore;
-using AutoMapper;
 using COVT_Web.Models.DB;
+using COVT_Web.Models.ViewModel;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Drawing;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
+using System.Reflection;
+using Word = Microsoft.Office.Interop.Word;
+
 
 namespace COVT_Web.Controllers
 {
@@ -36,7 +41,7 @@ namespace COVT_Web.Controllers
             {
                 am = am.Where(x => x.fio.Contains(poisk));
             }
-             var result = await am.ToListAsync();
+            var result = await am.ToListAsync();
 
             if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
@@ -60,12 +65,12 @@ namespace COVT_Web.Controllers
                            {
                                id_karti_patsienta = k.id_karti_patsienta,
                                data_priema = k.data_priema,
-                               id_bolezni=b.id_bolezni,
+                               id_bolezni = b.id_bolezni,
                                bolezn = b.nazvanie,
                                id_kobineta = k.id_kobineta,
-                               id_patsienta=p.id_patsienta,
+                               id_patsienta = p.id_patsienta,
                                patsient = p.familiya,
-                               id_vracha=v.id_vracha,
+                               id_vracha = v.id_vracha,
                                vrach = v.familiya,
                                zhalobi = k.zhalobi,
                                ist_zab = k.ist_zab,
@@ -84,19 +89,19 @@ namespace COVT_Web.Controllers
         [HttpPost]
         public async Task<IActionResult> KartaAmView(KartaAmView model, int id)
         {
-                var ambulatorka = db.karta_patsienta.Find(id);
-                ambulatorka.zhalobi = model.zhalobi;
-                ambulatorka.ist_zab = model.ist_zab;
-                ambulatorka.nast_stat = model.nast_stat;
-                ambulatorka.mest_stat = model.mest_stat;
-                ambulatorka.dop_met_obsl = model.dop_met_obsl;
-                ambulatorka.diagnoz = model.diagnoz;
-                ambulatorka.plan_obsl = model.plan_obsl;
-                ambulatorka.plan_lech = model.plan_lech;
-                ambulatorka.zakl = model.zakl;
-                db.karta_patsienta.Update(ambulatorka);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Ambulatorka");
+            var ambulatorka = db.karta_patsienta.Find(id);
+            ambulatorka.zhalobi = model.zhalobi;
+            ambulatorka.ist_zab = model.ist_zab;
+            ambulatorka.nast_stat = model.nast_stat;
+            ambulatorka.mest_stat = model.mest_stat;
+            ambulatorka.dop_met_obsl = model.dop_met_obsl;
+            ambulatorka.diagnoz = model.diagnoz;
+            ambulatorka.plan_obsl = model.plan_obsl;
+            ambulatorka.plan_lech = model.plan_lech;
+            ambulatorka.zakl = model.zakl;
+            db.karta_patsienta.Update(ambulatorka);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Ambulatorka");
         }
 
         public async Task<IActionResult> Create()
@@ -126,7 +131,7 @@ namespace COVT_Web.Controllers
         {
             if (id != null)
             {
-                AmbulatorkaDb? karta = await db.karta_patsienta.FirstOrDefaultAsync(p => p.id_karti_patsienta== id);
+                AmbulatorkaDb? karta = await db.karta_patsienta.FirstOrDefaultAsync(p => p.id_karti_patsienta == id);
                 if (karta != null)
                 {
                     db.karta_patsienta.Remove(karta);
@@ -143,9 +148,100 @@ namespace COVT_Web.Controllers
             var bolezn = (from b in db.bolezni
                           where b.id_bolezni == id
                           select b).FirstOrDefault();
-            return Json(new { zhalobi = bolezn.zhalobi, ist_zab = bolezn.ist_zab, nast_stat=bolezn.nast_stat,
-            mest_stat=bolezn.mest_stat, dmo = bolezn.dop_met_obsl,diagnoz = bolezn.diagnoz,
-            plan_obsl=bolezn.plan_obsl, plan_lech=bolezn.plan_lech, zakl = bolezn.zakl});
+            return Json(new
+            {
+                zhalobi = bolezn.zhalobi,
+                ist_zab = bolezn.ist_zab,
+                nast_stat = bolezn.nast_stat,
+                mest_stat = bolezn.mest_stat,
+                dmo = bolezn.dop_met_obsl,
+                diagnoz = bolezn.diagnoz,
+                plan_obsl = bolezn.plan_obsl,
+                plan_lech = bolezn.plan_lech,
+                zakl = bolezn.zakl
+            });
+        }
+
+        [HttpPost]
+        public ActionResult GenerateDocument(KartaAmView model)
+        {
+            /// Путь к шаблонному файлу и путь к сгенерированному файлу
+            string templateFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "files", "выписка.docx");
+            string outputFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "files", "123.docx");
+
+            // Открываем шаблонный файл docx через поток данных
+            using (FileStream fileStream = new FileStream(templateFilePath, FileMode.Open))
+            {
+                using (WordprocessingDocument doc = WordprocessingDocument.Open(fileStream, true))
+                {
+                    var body = doc.MainDocumentPart.Document.Body;
+
+                    // Заменяем теги в шаблоне значениями из модели
+                    foreach (var text in body.Descendants<Text>())
+                    {
+                        text.Text = text.Text.Replace("<zhalobi>", model.zhalobi);
+                        text.Text = text.Text.Replace("<ist_zab>", model.ist_zab);
+                    }
+
+                    // Сохраняем изменения в новый файл
+                    doc.Save();
+                }
+            }
+
+            // Открываем сгенерированный файл Word
+            Process.Start(outputFilePath);
+
+            return Json(new { success = true });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Otpravka(int id)
+        {
+            var model = db.karta_patsienta.Find(id);
+            var kartast = new StatsionarDb
+            {
+                id_bolezni = model.id_bolezni,
+                id_patsienta = model.id_patsienta,
+                id_vracha = model.id_vracha,
+                data_postupleniya = System.DateTime.Now,
+                zhalobi=model.zhalobi,
+                ist_zab=model.ist_zab,
+                nast_stat=model.nast_stat,
+                mest_stat=model.mest_stat,
+                dop_met_obsl=model.dop_met_obsl,
+                diagnoz=model.diagnoz,
+                plan_lech=model.plan_lech,
+                plan_obsl=model.plan_obsl,
+                zakl=model.zakl
+            };
+            db.karta_lecheniya.Add(kartast);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Statsionar", "Statsionar");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Dubl(int id)
+        {
+            var model = db.karta_patsienta.Find(id);
+            var kartaam = new AmbulatorkaDb
+            {
+                id_bolezni = model.id_bolezni,
+                id_patsienta = model.id_patsienta,
+                id_vracha = model.id_vracha,
+                data_priema = System.DateTime.Now,
+                zhalobi = model.zhalobi,
+                ist_zab = model.ist_zab,
+                nast_stat = model.nast_stat,
+                mest_stat = model.mest_stat,
+                dop_met_obsl = model.dop_met_obsl,
+                diagnoz = model.diagnoz,
+                plan_lech = model.plan_lech,
+                plan_obsl = model.plan_obsl,
+                zakl = model.zakl
+            };
+            db.karta_patsienta.Add(kartaam);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Ambulatorka");
         }
     }
 }

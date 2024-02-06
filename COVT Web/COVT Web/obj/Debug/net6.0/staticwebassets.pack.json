@@ -17,6 +17,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\xvomoni\\Desktop\\COVT-Web\\COVT Web\\COVT Web\\wwwroot\\files\\123.docx",
+      "PackagePath": "staticwebassets\\files\\123.docx"
+    },
+    {
+      "Id": "C:\\Users\\xvomoni\\Desktop\\COVT-Web\\COVT Web\\COVT Web\\wwwroot\\files\\выписка.docx",
+      "PackagePath": "staticwebassets\\files\\выписка.docx"
+    },
+    {
       "Id": "C:\\Users\\xvomoni\\Desktop\\COVT-Web\\COVT Web\\COVT Web\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

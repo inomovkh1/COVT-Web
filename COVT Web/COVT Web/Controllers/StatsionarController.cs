@@ -1,6 +1,8 @@
 ﻿using COVT_Web.Models;
+using COVT_Web.Models.DB;
 using COVT_Web.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Drawing;
 
@@ -108,6 +110,64 @@ namespace COVT_Web.Controllers
             db.karta_lecheniya.Update(statsionar);
             await db.SaveChangesAsync();
             return RedirectToAction("Statsionar");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id != null)
+            {
+                StatsionarDb? karta = await db.karta_lecheniya.FirstOrDefaultAsync(p => p.id_karti == id);
+                if (karta != null)
+                {
+                    db.karta_lecheniya.Remove(karta);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Statsionar");
+                }
+            }
+            return NotFound();
+        }
+
+        public async Task<IActionResult> Create()
+        {
+            var vrachidata = await db.vrachi.ToListAsync();
+            ViewBag.VrachiDb = new SelectList(vrachidata, "id_vracha", "familiya");
+            var patsientidata = await db.patsienti.ToListAsync();
+            ViewBag.PatsientiDb = new SelectList(patsientidata, "id_patsienta", "familiya");
+            var boleznidata = await db.bolezni.ToListAsync();
+            ViewBag.BolezniDb = new SelectList(boleznidata, "id_bolezni", "nazvanie");
+            return View();
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(StatsionarDb karta)
+        {
+            db.karta_lecheniya.Add(karta);
+            await db.SaveChangesAsync();
+
+            // Возвращение обновленного представления
+            return RedirectToAction("Statsionar");
+        }
+
+        public JsonResult GetInfoBolezni(int id)
+        {
+
+            var bolezn = (from b in db.bolezni
+                          where b.id_bolezni == id
+                          select b).FirstOrDefault();
+            return Json(new
+            {
+                zhalobi = bolezn.zhalobi,
+                ist_zab = bolezn.ist_zab,
+                nast_stat = bolezn.nast_stat,
+                mest_stat = bolezn.mest_stat,
+                dmo = bolezn.dop_met_obsl,
+                diagnoz = bolezn.diagnoz,
+                plan_obsl = bolezn.plan_obsl,
+                plan_lech = bolezn.plan_lech,
+                zakl = bolezn.zakl
+            });
         }
     }
 }

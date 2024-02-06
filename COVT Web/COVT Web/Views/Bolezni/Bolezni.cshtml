@@ -1,0 +1,37 @@
+﻿@model IEnumerable<COVT_Web.Models.DB.BolezniDb>
+
+<head>
+    <link rel="stylesheet" href="~/css/mystile.css" />
+</head>
+<body>
+    <form asp-action="Bolezni" method="get">
+        <div class="form-group">
+            <label for="searchInput">Поиск болезни</label>
+            <input type="text" name="poisk" id="searchInput" value="@ViewData["Poiskk"]" />
+        </div>
+    </form>
+    <p></p>
+    <a asp-controller="Bolezni" asp-action="Create">Добавить болезнь</a>
+    <div id="partialViewContainer">
+        @Html.Partial("_PartialViewBolezni", Model)
+    </div>
+</body>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#searchInput').on('input', function () {
+                var poisk = $(this).val().trim();
+                $.ajax({
+                    url: '/Bolezni/Bolezni',
+                    type: 'GET',
+                    data: { poisk: poisk },
+                    success: function (result) {
+                        $('#partialViewContainer').html(result);
+                    }
+                });
+            });
+        });
+    </script>
+}

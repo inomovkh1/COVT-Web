@@ -1,0 +1,135 @@
+﻿@model COVT_Web.Models.DB.StatsionarDb
+<head>
+    <link rel="stylesheet" href="~/css/mystile.css" />
+</head>
+<body>
+    <form asp-action="Create" asp-controller="Statsionar" method="post">
+        <div>
+            <label>Дата приёма:</label>
+            <input asp-for="data_postupleniya" type="date"/>
+        </div>
+        <div>
+            <label>Болезнь:</label>
+            <select asp-for="id_bolezni" asp-items="ViewBag.BolezniDb"></select>
+        </div>
+
+        <div>
+            <label>Врач:</label>
+            <select asp-for="id_vracha" asp-items="ViewBag.VrachiDb"></select>
+        </div>
+
+        <div>
+            <label>Пациент:</label>
+            <select asp-for="id_patsienta" asp-items="ViewBag.PatsientiDb"></select>
+        </div>
+        <div>
+            <label>Жалобы:</label>
+            <input asp-for="zhalobi" class="form-control" id="zhalobi" />
+        </div>
+
+        <div>
+            <label>История заболевания:</label>
+            <input asp-for="ist_zab" class="form-control" id="ist_zab" />
+        </div>
+
+        <div>
+            <label>История жизни:</label>
+            <input asp-for="ist_zhizni" class="form-control" id="ist_zhizni" />
+        </div>
+
+        <div>
+            <label>Настоящий статус:</label>
+            <input asp-for="nast_stat" class="form-control" id="nast_stat" />
+        </div>
+
+        <div>
+            <label>Местный статус:</label>
+            <input asp-for="mest_stat" class="form-control" id="mest_stat" />
+        </div>
+
+        <div>
+            <label>Дополнительные методы обследования:</label>
+            <input asp-for="dop_met_obsl" class="form-control" id="dmo" />
+        </div>
+
+        <div>
+            <label>Диагноз:</label>
+            <input asp-for="diagnoz" class="form-control" id="diagnoz" />
+        </div>
+
+        <div>
+            <label>План обследования:</label>
+            <input asp-for="plan_obsl" class="form-control" id="plan_obsl" />
+        </div>
+
+        <div>
+            <label>План лечения:</label>
+            <input asp-for="plan_lech" class="form-control" id="plan_lech" />
+        </div>
+
+        <div>
+            <label>Заключение:</label>
+            <input asp-for="zakl" class="form-control" id="zakl" />
+        </div>
+
+        <div>
+            <label>Наблюдение:</label>
+            <input asp-for="nablyudenie" class="form-control" id="nablyudenie" />
+        </div>
+
+        <div>
+            <label>Осмотр анастезиолога:</label>
+            <input asp-for="osman" class="form-control" id="osman" />
+        </div>
+
+        <div>
+            <label>Осмотр специалистов:</label>
+            <input asp-for="osmspets" class="form-control" id="osmspets" />
+        </div>
+
+        <div>
+            <label>Предоперационная подгатовка:</label>
+            <input asp-for="predoper" class="form-control" id="predoper" />
+        </div>
+
+        <div>
+            <label>Ход операции:</label>
+            <input asp-for="khod_operat" class="form-control" id="khod_operat" />
+        </div>
+
+        <div>
+            <label>Выписной эпикриз:</label>
+            <input asp-for="vip_epikr" class="form-control" id="vip_epikr" />
+        </div>
+
+        <div>
+            <button type="submit" class="btn-dark">Добавить пациента</button>
+        </div>
+    </form>
+</body>
+
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Обрабатываем изменение выбранной опции в поле "Болезнь"
+            $('#id_bolezni').on('change', function () {
+                var selectedDiseaseId = $(this).val();
+
+                // Отправляем AJAX-запрос на сервер
+                $.get('/Ambulatorka/GetInfoBolezni', { id: selectedDiseaseId }, function (response) {
+                    // Обновляем поля формы с данными из ответа
+                    $('#zhalobi').val(response.zhalobi);
+                    $('#ist_zab').val(response.ist_zab);
+                    $('#nast_stat').val(response.nast_stat);
+                    $('#mest_stat').val(response.mest_stat);
+                    $('#dmo').val(response.dmo);
+                    $('#diagnoz').val(response.diagnoz);
+                    $('#plan_obsl').val(response.plan_obsl);
+                    $('#plan_lech').val(response.plan_lech);
+                    $('#zakl').val(response.zakl);
+                });
+            });
+        });
+    </script>
+}

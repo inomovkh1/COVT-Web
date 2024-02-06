@@ -75,4 +75,27 @@
             <button type="submit" class="btn-dark">Сохранить</button>
         </div>
         </form>
+    <button id="generateButton" asp-route-id="@Model">Сгенерировать документ</button>
 </body>
+
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#generateButton').click(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GenerateDocument", "Ambulatorka")',
+                    success: function (data) {
+                        alert('Документ сгенерирован успешно!');
+                    },
+                    error: function (xhr, status, error) {
+                        var errorMessage = "Произошла ошибка при генерации документа: " + error;
+                        alert(errorMessage);
+                    }
+                });
+            });
+        });
+</script>
+}

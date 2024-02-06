@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "iXNO0vuvNOsmQnLYgRjaIw3OozF14d21SA3BdQ3tc6q94cYB2Bl0yedJM6v1ZYDwcIo1aYpGEZCOgPYVOK8xbQ==",
+  "dgSpecHash": "3ZalqQegir/DlzS9UGCZ0PqtoS9syP4ba6mCL9dASsI1NPNHDi2hiB9Z3XIk6I3hHGYFVcMBuzCq9k8y2qGBGw==",
   "success": true,
   "projectFilePath": "C:\\Users\\xvomoni\\Desktop\\COVT-Web\\COVT Web\\COVT Web\\COVT Web.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,8 @@
     "C:\\Users\\xvomoni\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\xvomoni\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
     "C:\\Users\\xvomoni\\.nuget\\packages\\dapper\\2.1.28\\dapper.2.1.28.nupkg.sha512",
+    "C:\\Users\\xvomoni\\.nuget\\packages\\documentformat.openxml\\3.0.1\\documentformat.openxml.3.0.1.nupkg.sha512",
+    "C:\\Users\\xvomoni\\.nuget\\packages\\documentformat.openxml.framework\\3.0.1\\documentformat.openxml.framework.3.0.1.nupkg.sha512",
     "C:\\Users\\xvomoni\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\xvomoni\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\xvomoni\\.nuget\\packages\\humanizer.core.af\\2.14.1\\humanizer.core.af.2.14.1.nupkg.sha512",
@@ -108,6 +110,7 @@
     "C:\\Users\\xvomoni\\.nuget\\packages\\microsoft.net.stringtools\\17.3.2\\microsoft.net.stringtools.17.3.2.nupkg.sha512",
     "C:\\Users\\xvomoni\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\xvomoni\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\xvomoni\\.nuget\\packages\\microsoft.office.interop.word\\15.0.4797.1004\\microsoft.office.interop.word.15.0.4797.1004.nupkg.sha512",
     "C:\\Users\\xvomoni\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "C:\\Users\\xvomoni\\.nuget\\packages\\microsoft.visualstudio.debugger.contracts\\17.2.0\\microsoft.visualstudio.debugger.contracts.17.2.0.nupkg.sha512",
     "C:\\Users\\xvomoni\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration\\6.0.16\\microsoft.visualstudio.web.codegeneration.6.0.16.nupkg.sha512",
@@ -176,6 +179,7 @@
     "C:\\Users\\xvomoni\\.nuget\\packages\\system.io.filesystem\\4.3.0\\system.io.filesystem.4.3.0.nupkg.sha512",
     "C:\\Users\\xvomoni\\.nuget\\packages\\system.io.filesystem.accesscontrol\\5.0.0\\system.io.filesystem.accesscontrol.5.0.0.nupkg.sha512",
     "C:\\Users\\xvomoni\\.nuget\\packages\\system.io.filesystem.primitives\\4.3.0\\system.io.filesystem.primitives.4.3.0.nupkg.sha512",
+    "C:\\Users\\xvomoni\\.nuget\\packages\\system.io.packaging\\8.0.0\\system.io.packaging.8.0.0.nupkg.sha512",
     "C:\\Users\\xvomoni\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512",
     "C:\\Users\\xvomoni\\.nuget\\packages\\system.linq\\4.3.0\\system.linq.4.3.0.nupkg.sha512",
     "C:\\Users\\xvomoni\\.nuget\\packages\\system.linq.expressions\\4.3.0\\system.linq.expressions.4.3.0.nupkg.sha512",

@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[2.1.28, )"
             },
+            "DocumentFormat.OpenXml": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
             "Microsoft.Data.SqlClient": {
               "target": "Package",
               "version": "[5.1.5, )"
@@ -61,6 +65,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.26, )"
+            },
+            "Microsoft.Office.Interop.Word": {
+              "target": "Package",
+              "version": "[15.0.4797.1004, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Contracts": {
               "target": "Package",

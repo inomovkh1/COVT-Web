@@ -32,6 +32,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW1idWxhdG9ya2FcX1BhcnRpYWxWaWV3QW1idWxhdG9ya2EuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Bolezni/Bolezni.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9sZXpuaVxCb2xlem5pLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Bolezni/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9sZXpuaVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Bolezni/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9sZXpuaVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Bolezni/_PartialViewBolezni.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9sZXpuaVxfUGFydGlhbFZpZXdCb2xlem5pLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Patsienti/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0c2llbnRpXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -54,6 +70,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Statsionar/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhdHNpb25hclxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/xvomoni/Desktop/COVT-Web/COVT Web/COVT Web/Views/Statsionar/KartaStView.cshtml]
