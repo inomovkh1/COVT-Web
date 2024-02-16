@@ -21,17 +21,17 @@
                 </td>
                 <td>
                     <form asp-controller="Ambulatorka" asp-action="Dubl" method="post" asp-route-id="@item.id_karti_patsienta">
-                        <input type="submit" value="Дублировать" />
+                        <input type="submit" value="Дублировать" class="otpravka" />
                     </form>
                 </td>
                 <td>
                     <form asp-controller="Ambulatorka" asp-action="Otpravka" method="post" asp-route-id="@item.id_karti_patsienta">
-                        <input type="submit" value="Отправить в стационар" />
+                        <input type="submit" value="Отправить в стационар" class="otpravka"/>
                     </form>
                 </td>
                 <td>
                     <form asp-controller="Ambulatorka" asp-action="Delete" method="post" asp-route-id="@item.id_karti_patsienta">
-                        <input type="submit" value="Удалить" />
+                        <input type="submit" value="Удалить" class="delete-button"/>
                     </form>
                 </td>
             </tr>

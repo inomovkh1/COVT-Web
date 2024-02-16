@@ -6,11 +6,12 @@
 <body>
     <form asp-action="Files" method="get">
         <div class="form-group">
-            <label for="searchInput">Поиск пациента</label>
-            <input type="text" id="searchInput" name="poisk" value="@ViewData["Poiskk"]" />
+            <input type="text" id="searchInput" name="poisk" value="@ViewData["Poiskk"]" placeholder="Поиск пациента" class="mytextbox"/>
+            <span>
+                <a asp-controller="Files" asp-action="Create" class="button-like">Добавить карту</a>
+            </span>
         </div>
     </form>
-    <a asp-controller="Files" asp-action="Create">Добавить карту</a>
     <div id="partialViewContainer">
         @Html.Partial("_PartialViewFiles", Model)
     </div>

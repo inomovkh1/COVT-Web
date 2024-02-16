@@ -24,86 +24,86 @@
         </div>
         <div>
             <label>Жалобы:</label>
-            <input asp-for="zhalobi" class="form-control" id="zhalobi" />
+            <textarea asp-for="zhalobi"  id="zhalobi"></textarea>
         </div>
 
         <div>
             <label>История заболевания:</label>
-            <input asp-for="ist_zab" class="form-control" id="ist_zab" />
+            <textarea asp-for="ist_zab"  id="ist_zab"></textarea>
         </div>
 
         <div>
             <label>История жизни:</label>
-            <input asp-for="ist_zhizni" class="form-control" id="ist_zhizni" />
+            <textarea asp-for="ist_zhizni"  id="ist_zhizni"></textarea>
         </div>
 
         <div>
             <label>Настоящий статус:</label>
-            <input asp-for="nast_stat" class="form-control" id="nast_stat" />
+            <textarea asp-for="nast_stat"  id="nast_stat"></textarea>
         </div>
 
         <div>
             <label>Местный статус:</label>
-            <input asp-for="mest_stat" class="form-control" id="mest_stat" />
+            <textarea asp-for="mest_stat"  id="mest_stat"></textarea>
         </div>
 
         <div>
             <label>Дополнительные методы обследования:</label>
-            <input asp-for="dop_met_obsl" class="form-control" id="dmo" />
+            <textarea asp-for="dop_met_obsl"  id="dmo"></textarea>
         </div>
 
         <div>
             <label>Диагноз:</label>
-            <input asp-for="diagnoz" class="form-control" id="diagnoz" />
+            <textarea asp-for="diagnoz"  id="diagnoz"></textarea>
         </div>
 
         <div>
             <label>План обследования:</label>
-            <input asp-for="plan_obsl" class="form-control" id="plan_obsl" />
+            <textarea asp-for="plan_obsl"  id="plan_obsl"></textarea>
         </div>
 
         <div>
             <label>План лечения:</label>
-            <input asp-for="plan_lech" class="form-control" id="plan_lech" />
+            <textarea asp-for="plan_lech"  id="plan_lech"></textarea>
         </div>
 
         <div>
             <label>Заключение:</label>
-            <input asp-for="zakl" class="form-control" id="zakl" />
+            <textarea asp-for="zakl"  id="zakl"></textarea>
         </div>
 
         <div>
             <label>Наблюдение:</label>
-            <input asp-for="nablyudenie" class="form-control" id="nablyudenie" />
+            <textarea asp-for="nablyudenie"  id="nablyudenie"></textarea>
         </div>
 
         <div>
             <label>Осмотр анастезиолога:</label>
-            <input asp-for="osman" class="form-control" id="osman" />
+            <textarea asp-for="osman"  id="osman"></textarea>
         </div>
 
         <div>
             <label>Осмотр специалистов:</label>
-            <input asp-for="osmspets" class="form-control" id="osmspets" />
+            <textarea asp-for="osmspets"  id="osmspets"></textarea>
         </div>
 
         <div>
             <label>Предоперационная подгатовка:</label>
-            <input asp-for="predoper" class="form-control" id="predoper" />
+            <textarea asp-for="predoper"  id="predoper"></textarea>
         </div>
 
         <div>
             <label>Ход операции:</label>
-            <input asp-for="khod_operat" class="form-control" id="khod_operat" />
+            <textarea asp-for="khod_operat"  id="khod_operat"></textarea>
         </div>
 
         <div>
             <label>Выписной эпикриз:</label>
-            <input asp-for="vip_epikr" class="form-control" id="vip_epikr" />
+            <textarea asp-for="vip_epikr"  id="vip_epikr"></textarea>
         </div>
 
         <div>
-            <button type="submit" class="btn-dark">Добавить пациента</button>
+            <button type="submit" class="button-like">Добавить пациента</button>
         </div>
     </form>
 </body>
@@ -112,7 +112,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            // Обрабатываем изменение выбранной опции в поле "Болезнь"
             $('#id_bolezni').on('change', function () {
                 var selectedDiseaseId = $(this).val();
 
@@ -128,7 +127,29 @@
                     $('#plan_obsl').val(response.plan_obsl);
                     $('#plan_lech').val(response.plan_lech);
                     $('#zakl').val(response.zakl);
+
+                    // Вызываем функцию для обновления высоты textarea для каждого textarea на странице
+                    $('textarea').each(function () {
+                        updateTextareaHeight($(this));
+                    });
                 });
+
+            });
+
+            // Функция для обновления высоты textarea
+            function updateTextareaHeight(textarea) {
+                const scrollTop = textarea.scrollTop;
+
+                textarea.style.height = "auto"; // Сначала установим auto
+                let scHeight = textarea.scrollHeight;
+                textarea.style.height = `${scHeight}px`;
+
+                textarea.scrollTop = scrollTop;
+            }
+
+            // Обработчик для реагирования на нажатия клавиш в поле textarea
+            $('textarea').on('input', function () {
+                updateTextareaHeight(this);
             });
         });
     </script>

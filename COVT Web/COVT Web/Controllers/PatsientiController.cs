@@ -77,6 +77,8 @@ namespace COVT_Web.Controllers
 
         public async Task<IActionResult> Edit(int? id)
         {
+            var vrachidata = await db.vrachi.ToListAsync();
+            ViewBag.VrachiDb = new SelectList(vrachidata, "id_vracha", "familiya");
             if (id != null)
             {
                 PatsientiDb? patsient = await db.patsienti.FirstOrDefaultAsync(p => p.id_patsienta== id);

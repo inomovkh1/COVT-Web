@@ -1,45 +1,43 @@
 ﻿@model COVT_Web.Models.DB.PatsientiDb
 
-<h2>Редактирование пользователя</h2>
+<head>
+    <h2>Редактирование пользователя</h2>
+    <link rel="stylesheet" href="~/css/mystile.css" />
+</head>
+<body>
+    <form asp-action="edit" asp-controller="Patsienti" asp-route-id="@Model.id_patsienta">
+        <div>
+            <label>Врач:</label>
+            <select asp-for="id_vracha" asp-items="ViewBag.VrachiDB"></select>
+        </div>
 
-<form asp-action="edit" asp-controller="Patsienti" asp-route-id="@Model.id_patsienta">
-    <div>
-        <label>Врач:</label>
-        <input asp-for="id_vracha" class="form-control" />
-        <span asp-validation-for="id_vracha" class="text-danger"></span>
-    </div>
+        <div>
+            <input asp-for="familiya"  class="mytextbox" placeholder="ФИО"/>
+            <span asp-validation-for="familiya" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label>Фамилия:</label>
-        <input asp-for="familiya" class="form-control" />
-        <span asp-validation-for="familiya" class="text-danger"></span>
-    </div>
+        <div>
+            <input asp-for="data_rozhdeniya"  class="mytextbox"/>
+            <span asp-validation-for="data_rozhdeniya" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label>Дата рождения:</label>
-        <input asp-for="data_rozhdeniya" class="form-control" />
-        <span asp-validation-for="data_rozhdeniya" class="text-danger"></span>
-    </div>
+        <div>
+            <input asp-for="nalichie_operatsii" class="mytextbox" placeholder="Наличие операции" />
+            <span asp-validation-for="nalichie_operatsii" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label>Наличие операции:</label>
-        <input asp-for="nalichie_operatsii" class="form-control" />
-        <span asp-validation-for="nalichie_operatsii" class="text-danger"></span>
-    </div>
+        <div>
+            <input asp-for="telefon" class="mytextbox" placeholder="Телефон" />
+            <span asp-validation-for="telefon" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label>Телефон:</label>
-        <input asp-for="telefon" class="form-control" />
-        <span asp-validation-for="telefon" class="text-danger"></span>
-    </div>
+        <div>
+            <input asp-for="adres" class="mytextbox" placeholder="Адрес" />
+            <span asp-validation-for="adres" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label>Адрес:</label>
-        <input asp-for="adres" class="form-control" />
-        <span asp-validation-for="adres" class="text-danger"></span>
-    </div>
-
-    <div>
-        <input type="submit" value="Сохранить" />
-    </div>
-</form>
+        <div>
+            <input type="submit" value="Сохранить" class="button-like"/>
+        </div>
+    </form>
+</body>

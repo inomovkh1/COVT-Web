@@ -25,82 +25,82 @@
 
         <div>
             <label>Жалобы:</label>
-            <input asp-for="@Model.zhalobi" class="form-control" value="@Model.zhalobi" />
+            <textarea asp-for="@Model.zhalobi" value="@Model.zhalobi"></textarea>
         </div>
 
         <div>
             <label>История заболевания:</label>
-            <input asp-for="@Model.ist_zab" class="form-control" value="@Model.ist_zab" />
+            <textarea asp-for="@Model.ist_zab" value="@Model.ist_zab"></textarea>
         </div>
 
         <div>
             <label>История жизни:</label>
-            <input asp-for="@Model.ist_zhizni" class="form-control" value="@Model.ist_zhizni" />
+            <textarea asp-for="@Model.ist_zhizni" value="@Model.ist_zhizni"></textarea>
         </div>
 
         <div>
             <label>Настоящий статус:</label>
-            <input asp-for="@Model.nast_stat" class="form-control" value="@Model.nast_stat" />
+            <textarea asp-for="@Model.nast_stat" value="@Model.nast_stat"></textarea>
         </div>
 
         <div>
             <label>Местный статус:</label>
-            <input asp-for="@Model.mest_stat" class="form-control" value="@Model.mest_stat" />
+            <textarea asp-for="@Model.mest_stat" value="@Model.mest_stat"></textarea>
         </div>
 
         <div>
             <label>Дополнительные методы обследования:</label>
-            <input asp-for="@Model.dop_met_obsl" class="form-control" value="@Model.dop_met_obsl" />
+            <textarea asp-for="@Model.dop_met_obsl" value="@Model.dop_met_obsl"></textarea>
         </div>
 
         <div>
             <label>Диагноз:</label>
-            <input asp-for="@Model.diagnoz" class="form-control" value="@Model.diagnoz" />
+            <textarea asp-for="@Model.diagnoz" value="@Model.diagnoz"></textarea>
         </div>
 
         <div>
             <label>План обследования:</label>
-            <input asp-for="@Model.plan_obsl" class="form-control" value="@Model.plan_obsl" />
+            <textarea asp-for="@Model.plan_obsl" value="@Model.plan_obsl"></textarea>
         </div>
 
         <div>
             <label>План лечения:</label>
-            <input asp-for="@Model.plan_lech" class="form-control" value="@Model.plan_lech" />
+            <textarea asp-for="@Model.plan_lech" value="@Model.plan_lech"></textarea>
         </div>
 
         <div>
             <label>Заключение:</label>
-            <input asp-for="@Model.zakl" class="form-control" value="@Model.zakl" />
+            <textarea asp-for="@Model.zakl" value="@Model.zakl"></textarea>
         </div>
 
         <div>
             <label>Наблюдение:</label>
-            <input asp-for="@Model.nablyudenie" class="form-control" value="@Model.nablyudenie" />
+            <textarea asp-for="@Model.nablyudenie" value="@Model.nablyudenie"></textarea>
         </div>
 
         <div>
             <label>Осмотр анастезиолога:</label>
-            <input asp-for="@Model.osman" class="form-control" value="@Model.osman" />
+            <textarea asp-for="@Model.osman" value="@Model.osman"></textarea>
         </div>
 
          <div>
             <label>Осмотр специалистов:</label>
-            <input asp-for="@Model.osmspets" class="form-control" value="@Model.osmspets" />
+            <textarea asp-for="@Model.osmspets" value="@Model.osmspets"></textarea>
         </div>
 
         <div>
             <label>Предоперационная подгатовка:</label>
-            <input asp-for="@Model.predoper" class="form-control" value="@Model.predoper" />
+            <textarea asp-for="@Model.predoper" value="@Model.predoper"></textarea>
         </div>
 
         <div>
             <label>Ход операции:</label>
-            <input asp-for="@Model.khod_operat" class="form-control" value="@Model.khod_operat" />
+            <textarea asp-for="@Model.khod_operat" value="@Model.khod_operat"></textarea>
         </div>
 
         <div>
             <label>Выписной эпикриз:</label>
-            <input asp-for="@Model.vip_epikr" class="form-control" value="@Model.vip_epikr" />
+            <textarea asp-for="@Model.vip_epikr" value="@Model.vip_epikr"></textarea>
         </div>
 
         <div>
@@ -108,7 +108,7 @@
         </div>
 
         <div>
-            <button type="submit" class="btn-dark">Сохранить</button>
+            <button type="submit" class="button-like">Сохранить</button>
         </div>
     </form>
 
@@ -135,3 +135,25 @@
         </tbody>
     </table>
 </body>
+
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script type="text/javascript">
+
+        function updateTextareaHeight(textarea) {
+            const scrollTop = textarea.scrollTop;
+
+            textarea.style.height = "auto"; // Сначала установим auto
+            let scHeight = textarea.scrollHeight;
+            textarea.style.height = `${scHeight}px`;
+
+            textarea.scrollTop = scrollTop;
+        }
+
+        // Обработчик для реагирования на нажатия клавиш в поле textarea
+        $('textarea').on('input', function () {
+            updateTextareaHeight(this);
+        });
+    </script>
+}

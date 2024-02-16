@@ -11,38 +11,33 @@
 
         <div class="container">
             <div class="entryarea">
-                <input asp-for="familiya" type="text" required/>
+                <input asp-for="familiya" type="text" required class="mytextbox" placeholder="ФИО"/>
                 <span asp-validation-for="familiya" class="text-danger"></span>
-                <div class="labelline">ФИО</div>
             </div>
         </div>
 
         <div>
-            <label>Дата рождения:</label>
-            <input asp-for="data_rozhdeniya" class="form-control"/>
+            <input asp-for="data_rozhdeniya" class="mytextbox" placeholder="Дата рождения"/>
             <span asp-validation-for="data_rozhdeniya" class="text-danger"></span>
         </div>
 
         <div>
-            <label>Наличие операции:</label>
-            <input asp-for="nalichie_operatsii" class="form-control"/>
+            <input asp-for="nalichie_operatsii" class="mytextbox" placeholder="Наличие операции" />
             <span asp-validation-for="nalichie_operatsii" class="text-danger"></span>
         </div>
 
         <div>
-            <label>Телефон:</label>
-            <input asp-for="telefon" class="form-control"/>
+            <input asp-for="telefon" class="mytextbox" placeholder="Телефон" />
             <span asp-validation-for="telefon" class="text-danger"></span>
         </div>
 
         <div>
-            <label>Адрес:</label>
-            <input asp-for="adres" class="form-control"/>
+            <input asp-for="adres" class="mytextbox" placeholder="Адрес" />
             <span asp-validation-for="adres" class="text-danger"></span>
         </div>
 
         <div>
-            <button type="submit" class="btn-dark">Добавить пациента</button>
+            <button class="button-like" type="submit" width="200px">Добавить пациента</button>
         </div>
     </form>
 </body>

@@ -6,12 +6,10 @@
 <body>
     <form asp-action="Patsienti" method="get">
         <div class="form-group">
-            <label for="searchInput">Поиск пациента</label>
-            <input type="text" name="poisk" id="searchInput" value="@ViewData["Poiskk"]" />
+            <input class="mytextbox" type="text" name="poisk" id="searchInput" placeholder="Поиск пациента" value="@ViewData["Poiskk"]" />
+            <span><a asp-controller="Patsienti" asp-action="Create" class="button-like">Добавить пациента</a></span>
         </div>
     </form>
-    <p></p>
-    <a asp-controller="Patsienti" asp-action="Create">Добавить пациента</a>
     <div id="partialViewContainer">
         @Html.Partial("_PartialViewPatsienti", Model)
     </div>

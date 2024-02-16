@@ -6,19 +6,17 @@
     @using (Html.BeginForm("Create", "Files", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <div>
-            <label>Дата:</label>
-            <input asp-for="date" type="date" />
+            <input asp-for="date" type="date" class="mytextbox"/>
         </div>
         <div>
             <label>Пациент:</label>
             <select asp-for="id_patsienta" asp-items="ViewBag.PatsientiDb"></select>
         </div>
         <div>
-            <label>Описание документа:</label>
-            <input asp-for="opisanie" class="form-control" id="opisanie" />
+            <input asp-for="opisanie" class="mytextbox" placeholder="Описание документа" id="opisanie" />
         </div>
-        <input type="file" name="file" />
-        <input type="submit" value="Submit" />
+        <input type="file" name="file" class="button-like"/>
+        <input type="submit" value="Сохранить" class="button-like"/>
     }
     @*<form asp-action="Create" asp-controller="Statsionar" method="post">
         <div>
