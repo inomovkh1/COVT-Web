@@ -49,7 +49,7 @@ namespace COVT_Web.Controllers
         public async Task<IActionResult> KartaStView(int? id)
         {
 
-            var kartaSt = (from k in db.karta_lecheniya
+            var kartaSt = await (from k in db.karta_lecheniya
                            join p in db.patsienti on k.id_patsienta equals p.id_patsienta
                            join b in db.bolezni on k.id_bolezni equals b.id_bolezni
                            join v in db.vrachi on k.id_vracha equals v.id_vracha
@@ -83,7 +83,10 @@ namespace COVT_Web.Controllers
                                ist_zhizni = k.ist_zhizni
                            }).FirstOrDefaultAsync();
 
-            return View(await kartaSt);
+            var files = db.files.Where(f => f.id_patsienta == kartaSt.id_patsienta).ToList();
+
+            ViewBag.Files = files;
+            return View(kartaSt);
         }
 
         [HttpPost]

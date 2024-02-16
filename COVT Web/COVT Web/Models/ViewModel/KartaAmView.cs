@@ -1,4 +1,6 @@
-﻿namespace COVT_Web.Models.ViewModel
+﻿using COVT_Web.Models.DB;
+
+namespace COVT_Web.Models.ViewModel
 {
     public class KartaAmView
     {

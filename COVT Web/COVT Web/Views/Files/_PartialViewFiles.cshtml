@@ -1,0 +1,30 @@
+﻿@model IEnumerable<COVT_Web.Models.ViewModel.FilesView>
+<table class="content-table">
+    <thead>
+        <tr>
+            <th>ФИО</th>
+            <th>Описание</th>
+            <th>Дата добавления</th>
+            <th>#</th>
+            <th>#</th>
+        </tr>
+    </thead>
+    <tbody id="searchResults">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.fio</td>
+                <td>@item.opisanie</td>
+                <td>@item.date</td>
+                <td>
+                    <a asp-action="OpenFile" asp-controller="Files" asp-route-id="@item.id_file">Смотреть</a>
+                </td>
+                <td>
+                    <form asp-controller="Statsionar" asp-action="Delete" method="post" asp-route-id="@item.id_file">
+                        <input type="submit" value="Удалить" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

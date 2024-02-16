@@ -1,0 +1,36 @@
+﻿@model IEnumerable<COVT_Web.Models.ViewModel.FilesView>
+
+<head>
+    <link rel="stylesheet" href="~/css/mystile.css" />
+</head>
+<body>
+    <form asp-action="Files" method="get">
+        <div class="form-group">
+            <label for="searchInput">Поиск пациента</label>
+            <input type="text" id="searchInput" name="poisk" value="@ViewData["Poiskk"]" />
+        </div>
+    </form>
+    <a asp-controller="Files" asp-action="Create">Добавить карту</a>
+    <div id="partialViewContainer">
+        @Html.Partial("_PartialViewFiles", Model)
+    </div>
+</body>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#searchInput').on('input', function () {
+                var poisk = $(this).val().trim();
+                $.ajax({
+                    url: '/Files/Files',
+                    type: 'GET',
+                    data: { poisk: poisk },
+                    success: function (result) {
+                        $('#partialViewContainer').html(result);
+                    }
+                });
+            });
+        });
+    </script>
+}

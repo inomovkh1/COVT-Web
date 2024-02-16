@@ -9,8 +9,8 @@ namespace COVT_Web.Models
         public DbSet<VrachiDb> vrachi { get; set; }
         public DbSet<AmbulatorkaDb> karta_patsienta { get; set; }
         public DbSet<BolezniDb> bolezni { get; set; }
-
         public DbSet<StatsionarDb> karta_lecheniya { get; set; }
+        public DbSet<FilesDb> files { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) 
         {
@@ -23,6 +23,7 @@ namespace COVT_Web.Models
             modelBuilder.Entity<AmbulatorkaDb>().HasKey(a => a.id_karti_patsienta);
             modelBuilder.Entity<BolezniDb>().HasKey(b => b.id_bolezni);
             modelBuilder.Entity<StatsionarDb>().HasKey(s => s.id_karti);
+            modelBuilder.Entity<FilesDb>().HasKey(f => f.id_file);
         }
     }
 }

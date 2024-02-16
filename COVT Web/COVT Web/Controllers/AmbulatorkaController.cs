@@ -55,35 +55,39 @@ namespace COVT_Web.Controllers
 
         public async Task<IActionResult> KartaAmView(int? id)
         {
+            var kartaAm = await (from k in db.karta_patsienta
+                                 join p in db.patsienti on k.id_patsienta equals p.id_patsienta
+                                 join b in db.bolezni on k.id_bolezni equals b.id_bolezni
+                                 join v in db.vrachi on k.id_vracha equals v.id_vracha
+                                 where k.id_karti_patsienta == id
+                                 select new KartaAmView
+                                 {
+                                     id_karti_patsienta = k.id_karti_patsienta,
+                                     data_priema = k.data_priema,
+                                     id_bolezni = b.id_bolezni,
+                                     bolezn = b.nazvanie,
+                                     id_kobineta = k.id_kobineta,
+                                     id_patsienta = p.id_patsienta,
+                                     patsient = p.familiya,
+                                     id_vracha = v.id_vracha,
+                                     vrach = v.familiya,
+                                     zhalobi = k.zhalobi,
+                                     ist_zab = k.ist_zab,
+                                     nast_stat = k.nast_stat,
+                                     mest_stat = k.mest_stat,
+                                     dop_met_obsl = k.dop_met_obsl,
+                                     diagnoz = k.diagnoz,
+                                     plan_obsl = k.plan_obsl,
+                                     plan_lech = k.plan_lech,
+                                     zakl = k.zakl
+                                 }).FirstOrDefaultAsync();
+            var files = db.files.Where(f => f.id_patsienta == kartaAm.id_patsienta).ToList();
 
-            var kartaAm = (from k in db.karta_patsienta
-                           join p in db.patsienti on k.id_patsienta equals p.id_patsienta
-                           join b in db.bolezni on k.id_bolezni equals b.id_bolezni
-                           join v in db.vrachi on k.id_vracha equals v.id_vracha
-                           where k.id_karti_patsienta == id
-                           select new KartaAmView
-                           {
-                               id_karti_patsienta = k.id_karti_patsienta,
-                               data_priema = k.data_priema,
-                               id_bolezni = b.id_bolezni,
-                               bolezn = b.nazvanie,
-                               id_kobineta = k.id_kobineta,
-                               id_patsienta = p.id_patsienta,
-                               patsient = p.familiya,
-                               id_vracha = v.id_vracha,
-                               vrach = v.familiya,
-                               zhalobi = k.zhalobi,
-                               ist_zab = k.ist_zab,
-                               nast_stat = k.nast_stat,
-                               mest_stat = k.mest_stat,
-                               dop_met_obsl = k.dop_met_obsl,
-                               diagnoz = k.diagnoz,
-                               plan_obsl = k.plan_obsl,
-                               plan_lech = k.plan_lech,
-                               zakl = k.zakl
-                           }).FirstOrDefaultAsync();
+            ViewBag.Files = files;
 
-            return View(await kartaAm);
+            return View(kartaAm);
+
+
         }
 
         [HttpPost]

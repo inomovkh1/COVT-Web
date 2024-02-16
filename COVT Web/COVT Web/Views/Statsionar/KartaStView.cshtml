@@ -111,4 +111,27 @@
             <button type="submit" class="btn-dark">Сохранить</button>
         </div>
     </form>
+
+    <h2>Информация о файлах:</h2>
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>Дата загрузки</th>
+                <th>Описание</th>
+                <th>#</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var file in ViewBag.Files)
+            {
+                <tr>
+                    <td>@file.date</td>
+                    <td>@file.opisanie</td>
+                    <td>
+                        <a asp-action="OpenFile" asp-controller="Files" asp-route-id="@file.id_file">Смотреть</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </body>

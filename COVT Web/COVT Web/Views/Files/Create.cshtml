@@ -1,0 +1,47 @@
+﻿@model COVT_Web.Models.DB.FilesDb
+<head>
+    <link rel="stylesheet" href="~/css/mystile.css" />
+</head>
+<body>
+    @using (Html.BeginForm("Create", "Files", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div>
+            <label>Дата:</label>
+            <input asp-for="date" type="date" />
+        </div>
+        <div>
+            <label>Пациент:</label>
+            <select asp-for="id_patsienta" asp-items="ViewBag.PatsientiDb"></select>
+        </div>
+        <div>
+            <label>Описание документа:</label>
+            <input asp-for="opisanie" class="form-control" id="opisanie" />
+        </div>
+        <input type="file" name="file" />
+        <input type="submit" value="Submit" />
+    }
+    @*<form asp-action="Create" asp-controller="Statsionar" method="post">
+        <div>
+            <label>Дата:</label>
+            <input asp-for="date" type="date" />
+        </div>
+
+        <div>
+            <label>Пациент:</label>
+            <select asp-for="id_patsienta" asp-items="ViewBag.PatsientiDb"></select>
+        </div>
+        <div>
+            <label>Описание документа:</label>
+            <input asp-for="opisanie" class="form-control" id="opisanie" />
+        </div>
+        <div>
+            <button type="submit" class="btn-dark">Добавить файл</button>
+        </div>
+    </form>*@
+</body>
+
+@*routes.MapRoute(
+    name: "Default",
+    url: "{controller}/{action}/{id}",
+    defaults: new { controller = "Files", action = "Create", id = UrlParameter.Optional }
+);*@

@@ -260,3 +260,5 @@ C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\DocumentFor
 C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\DocumentFormat.OpenXml.Framework.dll
 C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\System.IO.Packaging.dll
 C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\Microsoft.Office.Interop.Word.dll
+C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
