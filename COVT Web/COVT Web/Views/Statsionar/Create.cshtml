@@ -6,7 +6,7 @@
     <form asp-action="Create" asp-controller="Statsionar" method="post">
         <div>
             <label>Дата приёма:</label>
-            <input asp-for="data_postupleniya" type="date"/>
+            <input asp-for="data_postupleniya" type="date" class="mytextbox" id="dateField"/>
         </div>
         <div>
             <label>Болезнь:</label>
@@ -103,7 +103,7 @@
         </div>
 
         <div>
-            <button type="submit" class="button-like">Добавить пациента</button>
+            <button type="submit" class="button-like">Добавить карту</button>
         </div>
     </form>
 </body>
@@ -111,6 +111,8 @@
 @section Scripts{
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
+        document.getElementById('dateField').valueAsDate = new Date();
+
         $(document).ready(function () {
             $('#id_bolezni').on('change', function () {
                 var selectedDiseaseId = $(this).val();
@@ -152,5 +154,30 @@
                 updateTextareaHeight(this);
             });
         });
+
+        $(document).ready(function () {
+            $('#plan_obsl, #plan_lech').keydown(function (e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+
+                    var text = $(this).val();
+                    var lines = text.split('\n');
+                    var numberedLines = '';
+                    var hasNumberedList = /^\d+\. /; // Регулярное выражение для проверки наличия номера абзаца
+
+                    for (var i = 0; i < lines.length; i++) {
+                        if (hasNumberedList.test(lines[i])) {
+                            // Пропускаем нумерацию, если строка уже начинается с номера абзаца
+                            numberedLines += lines[i] + '\n';
+                        } else {
+                            numberedLines += (i + 1) + '. ' + lines[i] + '\n';
+                        }
+                    }
+
+                    $(this).val(numberedLines);
+                }
+            });
+        });
+
     </script>
 }

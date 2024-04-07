@@ -4,7 +4,9 @@ using COVT_Web.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NPOI.XWPF.UserModel;
 using System.Drawing;
+using System.Web;
 
 namespace COVT_Web.Controllers
 {
@@ -50,38 +52,40 @@ namespace COVT_Web.Controllers
         {
 
             var kartaSt = await (from k in db.karta_lecheniya
-                           join p in db.patsienti on k.id_patsienta equals p.id_patsienta
-                           join b in db.bolezni on k.id_bolezni equals b.id_bolezni
-                           join v in db.vrachi on k.id_vracha equals v.id_vracha
-                           where k.id_karti == id
-                           select new KartaStView
-                           {
-                               id_karti = k.id_karti,
-                               data_postupleniya = k.data_postupleniya,
-                               id_bolezni = b.id_bolezni,
-                               bolezn = b.nazvanie,
-                               id_patsienta = p.id_patsienta,
-                               patsient = p.familiya,
-                               id_vracha = v.id_vracha,
-                               vrach = v.familiya,
-                               zhalobi = k.zhalobi,
-                               ist_zab = k.ist_zab,
-                               nast_stat = k.nast_stat,
-                               mest_stat = k.mest_stat,
-                               dop_met_obsl = k.dop_met_obsl,
-                               diagnoz = k.diagnoz,
-                               plan_obsl = k.plan_obsl,
-                               plan_lech = k.plan_lech,
-                               nablyudenie = k.nablyudenie,
-                               khod_operat = k.khod_operat,
-                               zakl = k.zakl,
-                               vip_epikr = k.vip_epikr,
-                               data_vipiski = k.data_vipiski,
-                               predoper = k.predoper,
-                               osman = k.osman,
-                               osmspets = k.osmspets,
-                               ist_zhizni = k.ist_zhizni
-                           }).FirstOrDefaultAsync();
+                                 join p in db.patsienti on k.id_patsienta equals p.id_patsienta
+                                 join b in db.bolezni on k.id_bolezni equals b.id_bolezni
+                                 join v in db.vrachi on k.id_vracha equals v.id_vracha
+                                 where k.id_karti == id
+                                 select new KartaStView
+                                 {
+                                     id_karti = k.id_karti,
+                                     data_postupleniya = k.data_postupleniya,
+                                     id_bolezni = b.id_bolezni,
+                                     bolezn = b.nazvanie,
+                                     id_patsienta = p.id_patsienta,
+                                     patsient = p.familiya,
+                                     adres = p.adres,
+                                     dr = p.data_rozhdeniya,
+                                     id_vracha = v.id_vracha,
+                                     vrach = v.familiya,
+                                     zhalobi = k.zhalobi,
+                                     ist_zab = k.ist_zab,
+                                     nast_stat = k.nast_stat,
+                                     mest_stat = k.mest_stat,
+                                     dop_met_obsl = k.dop_met_obsl,
+                                     diagnoz = k.diagnoz,
+                                     plan_obsl = k.plan_obsl,
+                                     plan_lech = k.plan_lech,
+                                     nablyudenie = k.nablyudenie,
+                                     khod_operat = k.khod_operat,
+                                     zakl = k.zakl,
+                                     vip_epikr = k.vip_epikr,
+                                     data_vipiski = k.data_vipiski,
+                                     predoper = k.predoper,
+                                     osman = k.osman,
+                                     osmspets = k.osmspets,
+                                     ist_zhizni = k.ist_zhizni
+                                 }).FirstOrDefaultAsync();
 
             var files = db.files.Where(f => f.id_patsienta == kartaSt.id_patsienta).ToList();
 
@@ -110,9 +114,10 @@ namespace COVT_Web.Controllers
             statsionar.osman = model.osman;
             statsionar.osmspets = model.osmspets;
             statsionar.ist_zhizni = model.ist_zhizni;
+            statsionar.data_vipiski = model.data_vipiski;
             db.karta_lecheniya.Update(statsionar);
             await db.SaveChangesAsync();
-            return RedirectToAction("Statsionar");
+            return RedirectToAction("KaratStView");
         }
 
         [HttpPost]
@@ -171,6 +176,50 @@ namespace COVT_Web.Controllers
                 plan_lech = bolezn.plan_lech,
                 zakl = bolezn.zakl
             });
+        }
+
+        [HttpPost]
+        public ActionResult GenerateDocument(KartaStView model)
+        {
+            /// Путь к шаблонному файлу и путь к сгенерированному файлу
+            string templateFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "files", "выписка2.docx");
+
+            // Открываем шаблонный файл docx через поток данных
+            using (FileStream fileStream = new FileStream(templateFilePath, FileMode.Open))
+            {
+                var memoryStream = new MemoryStream();
+                using var docFile = new XWPFDocument(fileStream);
+                foreach (var paragraph in docFile.Paragraphs)
+                {
+                    var text = paragraph.Text;
+
+                    paragraph.ReplaceText("<zhalobi>", model.zhalobi);
+                    paragraph.ReplaceText("<ist_zab>", model.ist_zab);
+                    paragraph.ReplaceText("<ist_zhizni>", model.ist_zhizni);
+                    paragraph.ReplaceText("<nast_stat>", model.nast_stat);
+                    paragraph.ReplaceText("<mest_stat>", model.mest_stat);
+                    paragraph.ReplaceText("<dmo>", model.dop_met_obsl);
+                    paragraph.ReplaceText("<plan_obsl>", model.plan_obsl);
+                    paragraph.ReplaceText("<plan_lech>", model.plan_lech);
+                    paragraph.ReplaceText("<nabl>", model.nablyudenie);
+                    paragraph.ReplaceText("<osan>", model.osman);
+                    paragraph.ReplaceText("<ossp>", model.osmspets);
+                    paragraph.ReplaceText("<peredoper>", model.predoper);
+                    paragraph.ReplaceText("<khodop>", model.khod_operat);
+                    paragraph.ReplaceText("<vipisn>", model.vip_epikr);
+                    paragraph.ReplaceText("<zakl>", model.zakl);
+                    paragraph.ReplaceText("<diagnoz>", model.diagnoz);
+                    paragraph.ReplaceText("<adres>", model.adres);
+                    paragraph.ReplaceText("<dr>", model.dr.ToString());
+                    paragraph.ReplaceText("<patsient>", model.patsient);
+                    paragraph.ReplaceText("<data_postupleniya>", model.data_postupleniya.ToString());
+                    paragraph.ReplaceText("<data_vipiski>", model.data_vipiski.ToString());
+                }
+                docFile.Write(memoryStream);
+                memoryStream.Seek(0, SeekOrigin.Begin);
+                var fileName = HttpUtility.UrlEncode($"Выписка_{model.patsient}.docx");
+                return File(memoryStream.ToArray(), "application/octet-stream", fileName);
+            }
         }
     }
 }

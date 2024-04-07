@@ -262,3 +262,17 @@ C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\System.IO.P
 C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\Microsoft.Office.Interop.Word.dll
 C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
 C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
+C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\Enums.NET.dll
+C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\MathNet.Numerics.dll
+C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\NPOI.Core.dll
+C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\NPOI.OOXML.dll
+C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\NPOI.OpenXml4Net.dll
+C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\NPOI.OpenXmlFormats.dll
+C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\ICSharpCode.SharpZipLib.dll
+C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\SixLabors.Fonts.dll
+C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\SixLabors.ImageSharp.dll
+C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\System.Security.Cryptography.Xml.dll
+C:\Users\xvomoni\Desktop\COVT-Web\COVT Web\COVT Web\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll

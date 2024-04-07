@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "eGqzwmPfsfs4+s8ghn5zU/HdCk5bVUa5qefWwxub0QQ=",
+  "Hash": "L6LxaW7c79HM+aO6ieHvCY+913HQNZWrKyRKnVn2cJs=",
   "Source": "COVT Web",
   "BasePath": "_content/COVT Web",
   "Mode": "Default",
@@ -102,23 +102,6 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\xvomoni\\Desktop\\COVT-Web\\COVT Web\\COVT Web\\wwwroot\\files\\123.docx",
-      "SourceId": "COVT Web",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\xvomoni\\Desktop\\COVT-Web\\COVT Web\\COVT Web\\wwwroot\\",
-      "BasePath": "_content/COVT Web",
-      "RelativePath": "files/123.docx",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\files\\123.docx"
-    },
-    {
       "Identity": "C:\\Users\\xvomoni\\Desktop\\COVT-Web\\COVT Web\\COVT Web\\wwwroot\\files\\выписка.docx",
       "SourceId": "COVT Web",
       "SourceType": "Discovered",
@@ -134,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\files\\выписка.docx"
+    },
+    {
+      "Identity": "C:\\Users\\xvomoni\\Desktop\\COVT-Web\\COVT Web\\COVT Web\\wwwroot\\files\\выписка2.docx",
+      "SourceId": "COVT Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\xvomoni\\Desktop\\COVT-Web\\COVT Web\\COVT Web\\wwwroot\\",
+      "BasePath": "_content/COVT Web",
+      "RelativePath": "files/выписка2.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\выписка2.docx"
     },
     {
       "Identity": "C:\\Users\\xvomoni\\Desktop\\COVT-Web\\COVT Web\\COVT Web\\wwwroot\\js\\site.js",

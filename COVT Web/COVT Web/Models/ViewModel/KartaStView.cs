@@ -14,6 +14,10 @@
 
         public string patsient { get; set; }
 
+        public string? adres { get; set; }
+
+        public DateTime dr { get; set; }
+
         public int id_vracha { get; set; }
 
         public string vrach { get; set; }

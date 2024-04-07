@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using NPOI.XWPF.UserModel;
 using System.Diagnostics;
 using System.Reflection;
+using System.Web;
 using Word = Microsoft.Office.Interop.Word;
 
 
@@ -69,6 +71,8 @@ namespace COVT_Web.Controllers
                                      id_kobineta = k.id_kobineta,
                                      id_patsienta = p.id_patsienta,
                                      patsient = p.familiya,
+                                     adres = p.adres,
+                                     dr=p.data_rozhdeniya,
                                      id_vracha = v.id_vracha,
                                      vrach = v.familiya,
                                      zhalobi = k.zhalobi,
@@ -171,31 +175,35 @@ namespace COVT_Web.Controllers
         {
             /// Путь к шаблонному файлу и путь к сгенерированному файлу
             string templateFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "files", "выписка.docx");
-            string outputFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "files", "123.docx");
 
             // Открываем шаблонный файл docx через поток данных
             using (FileStream fileStream = new FileStream(templateFilePath, FileMode.Open))
             {
-                using (WordprocessingDocument doc = WordprocessingDocument.Open(fileStream, true))
+                var memoryStream = new MemoryStream();
+                using var docFile = new XWPFDocument(fileStream);
+                foreach (var paragraph in docFile.Paragraphs)
                 {
-                    var body = doc.MainDocumentPart.Document.Body;
+                    var text = paragraph.Text;
 
-                    // Заменяем теги в шаблоне значениями из модели
-                    foreach (var text in body.Descendants<Text>())
-                    {
-                        text.Text = text.Text.Replace("<zhalobi>", model.zhalobi);
-                        text.Text = text.Text.Replace("<ist_zab>", model.ist_zab);
-                    }
-
-                    // Сохраняем изменения в новый файл
-                    doc.Save();
+                    paragraph.ReplaceText("<zhalobi>", model.zhalobi);
+                    paragraph.ReplaceText("<ist_zab>", model.ist_zab);
+                    paragraph.ReplaceText("<nast_stat>", model.nast_stat);
+                    paragraph.ReplaceText("<mest_stat>", model.mest_stat);
+                    paragraph.ReplaceText("<dmo>", model.dop_met_obsl);
+                    paragraph.ReplaceText("<plan_obsl>", model.plan_obsl);
+                    paragraph.ReplaceText("<plan_lech>", model.plan_lech);
+                    paragraph.ReplaceText("<zakl>", model.zakl);
+                    paragraph.ReplaceText("<diagnoz>", model.diagnoz);
+                    paragraph.ReplaceText("<patsient>", model.patsient);
+                    paragraph.ReplaceText("<data_postupleniya>", model.data_priema.ToString());
+                    paragraph.ReplaceText("<adres>", model.adres);
+                    paragraph.ReplaceText("<dr>", model.dr.ToString());
                 }
+                docFile.Write(memoryStream);
+                memoryStream.Seek(0, SeekOrigin.Begin);
+                var fileName = HttpUtility.UrlEncode($"Выписка_{model.patsient}.docx");
+                return File(memoryStream.ToArray(), "application/octet-stream", fileName);
             }
-
-            // Открываем сгенерированный файл Word
-            Process.Start(outputFilePath);
-
-            return Json(new { success = true });
         }
 
         [HttpPost]
@@ -208,15 +216,15 @@ namespace COVT_Web.Controllers
                 id_patsienta = model.id_patsienta,
                 id_vracha = model.id_vracha,
                 data_postupleniya = System.DateTime.Now,
-                zhalobi=model.zhalobi,
-                ist_zab=model.ist_zab,
-                nast_stat=model.nast_stat,
-                mest_stat=model.mest_stat,
-                dop_met_obsl=model.dop_met_obsl,
-                diagnoz=model.diagnoz,
-                plan_lech=model.plan_lech,
-                plan_obsl=model.plan_obsl,
-                zakl=model.zakl
+                zhalobi = model.zhalobi,
+                ist_zab = model.ist_zab,
+                nast_stat = model.nast_stat,
+                mest_stat = model.mest_stat,
+                dop_met_obsl = model.dop_met_obsl,
+                diagnoz = model.diagnoz,
+                plan_lech = model.plan_lech,
+                plan_obsl = model.plan_obsl,
+                zakl = model.zakl
             };
             db.karta_lecheniya.Add(kartast);
             await db.SaveChangesAsync();

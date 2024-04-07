@@ -4,10 +4,13 @@
     <link rel="stylesheet" href="~/css/mystile.css" />
 </head>
 <body>
-    <form asp-action="KartaStView" asp-controller="Statsionar" asp-route-id="@Model.id_karti">
+    <form asp-action="KartaStView" asp-controller="Statsionar" asp-route-id="@Model.id_karti" id="myForm">
 
         <div>
             <label>Пациент: @Model.patsient</label>
+            <input type="hidden" asp-for="@Model.patsient" value="@Model.patsient" />
+            <input type="hidden" asp-for="@Model.adres" value="@Model.adres" />
+            <input type="hidden" asp-for="@Model.dr" value="@Model.dr" />
         </div>
 
         <div>
@@ -105,12 +108,16 @@
 
         <div>
             <label>Дата выписки: @Model.data_vipiski</label>
+            <input type="date" class="mytextbox" asp-for="@Model.data_vipiski" value="@Model.data_vipiski">
         </div>
 
         <div>
             <button type="submit" class="button-like">Сохранить</button>
         </div>
     </form>
+
+    <span><button id="generateButton" class="button-like">Сгенерировать документ</button></span>
+
 
     <h2>Информация о файлах:</h2>
     <table class="content-table">
@@ -140,6 +147,81 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script type="text/javascript">
+        $("#generateButton").click(function () {
+            var form = $("#myForm").serialize();
+            //form = new FormData(form);
+            console.log(form);
+
+            GetFile(form);
+        });
+
+        function GetFile(formData) {
+            $.ajax({
+                url: '/Statsionar/GenerateDocument', //Изменить на свой адрес
+                type: 'POST',
+                xhrFields: { responseType: 'blob' }, //Указываем что ожидаемый тип ответа blob
+                data: formData,
+                processData: false,
+                success: function (response, status, xhr) {
+                    var fileName = GetFileName(xhr);
+
+                    // Создания ссылки на файл
+                    var url = window.URL.createObjectURL(response);
+
+                    // Создание времменого тега ссылки
+                    var link = document.createElement('a');
+
+                    // Присваивания ссылки файла к тегу
+                    link.href = url;
+
+                    // Присваивания названия файла
+                    link.download = fileName;
+
+                    //Добавление тега ссылки в тег body
+                    document.body.appendChild(link);
+
+                    //Имитация нажатия на ссылку
+                    link.click();
+
+                    // Удаление временной ссылки
+                    window.URL.revokeObjectURL(url);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Произошла ошибка:', error);
+                }
+            });
+        }
+
+        //Метод возвращает имя файла со стороны сервера
+        function GetFileName(xhr) {
+            var fileName = "default_name.docx";
+
+            var contentDisposition = xhr.getResponseHeader('Content-Disposition');
+            var disposition = xhr.getResponseHeader('Content-Disposition');
+
+            if (disposition && disposition.indexOf('attachment') !== -1) {
+                var fileNameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                var matches = fileNameRegex.exec(disposition);
+
+                if (matches != null && matches[1]) {
+                    fileName = matches[1].replace(/['"]/g, '');
+                    fileName = decodeURI(fileName);
+                }
+            }
+
+            return fileName;
+        }
+
+        function saveByteArray(reportName, byte) {
+            var blob = new Blob([byte], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+            var link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            var fileName = reportName;
+            link.download = fileName;
+            link.click();
+
+            URL.revokeObjectURL(link.href);
+        };
 
         function updateTextareaHeight(textarea) {
             const scrollTop = textarea.scrollTop;
@@ -154,6 +236,30 @@
         // Обработчик для реагирования на нажатия клавиш в поле textarea
         $('textarea').on('input', function () {
             updateTextareaHeight(this);
+        });
+
+        $(document).ready(function () {
+            $('#plan_obsl, #plan_lech').keydown(function (e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+
+                    var text = $(this).val();
+                    var lines = text.split('\n');
+                    var numberedLines = '';
+                    var hasNumberedList = /^\d+\. /; // Регулярное выражение для проверки наличия номера абзаца
+
+                    for (var i = 0; i < lines.length; i++) {
+                        if (hasNumberedList.test(lines[i])) {
+                            // Пропускаем нумерацию, если строка уже начинается с номера абзаца
+                            numberedLines += lines[i] + '\n';
+                        } else {
+                            numberedLines += (i + 1) + '. ' + lines[i] + '\n';
+                        }
+                    }
+
+                    $(this).val(numberedLines);
+                }
+            });
         });
     </script>
 }

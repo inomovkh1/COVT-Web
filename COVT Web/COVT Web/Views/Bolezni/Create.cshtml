@@ -6,7 +6,7 @@
     <form asp-action="Create" asp-controller="Bolezni" method="post">
         <div>
             <label>Название:</label>
-            <textarea asp-for="nazvanie" class="form-control" id="nazvanie"></textarea>
+            <input class="mytextbox" asp-for="nazvanie" class="form-control" id="nazvanie" />
         </div>
 
         <div>
@@ -80,6 +80,28 @@
                 updateTextareaHeight(this);
             });
 
+        $(document).ready(function () {
+            $('#plan_obsl, #plan_lech').keydown(function (e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
 
+                    var text = $(this).val();
+                    var lines = text.split('\n');
+                    var numberedLines = '';
+                    var hasNumberedList = /^\d+\. /; // Регулярное выражение для проверки наличия номера абзаца
+
+                    for (var i = 0; i < lines.length; i++) {
+                        if (hasNumberedList.test(lines[i])) {
+                            // Пропускаем нумерацию, если строка уже начинается с номера абзаца
+                            numberedLines += lines[i] + '\n';
+                        } else {
+                            numberedLines += (i + 1) + '. ' + lines[i] + '\n';
+                        }
+                    }
+
+                    $(this).val(numberedLines);
+                }
+            });
+        });
     </script>
 }

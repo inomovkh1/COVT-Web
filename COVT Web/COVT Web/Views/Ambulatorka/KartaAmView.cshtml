@@ -4,10 +4,13 @@
     <link rel="stylesheet" href="~/css/mystile.css" />
 </head>
 <body>
-    <form asp-action="KartaAmView" asp-controller="Ambulatorka" asp-route-id="@Model.id_karti_patsienta">
+    <form asp-action="KartaAmView" asp-controller="Ambulatorka" asp-route-id="@Model.id_karti_patsienta" id="myForm">
 
         <div>
-            <label>Пациент: @Model.patsient</label>
+            <label asp-for="@Model.patsient">Пациент: @Model.patsient</label>
+            <input type="hidden" asp-for="@Model.patsient" value="@Model.patsient" />
+            <input type="hidden" asp-for="@Model.adres" value="@Model.adres" />
+            <input type="hidden" asp-for="@Model.dr" value="@Model.dr" />
         </div>
 
         <div>
@@ -73,33 +76,33 @@
 
         <div>
             <button type="submit" class="button-like">Сохранить</button>
-            <span><button id="generateButton" asp-route-id="@Model" class="button-like">Сгенерировать документ</button></span>
+
         </div>
-        </form>
-    
+    </form>
+    <span><button id="generateButton" class="button-like">Сгенерировать документ</button></span>
 
     <h2>Информация о файлах:</h2>
-        <table class="content-table">
-            <thead>
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>Дата загрузки</th>
+                <th>Описание</th>
+                <th>#</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var file in ViewBag.Files)
+            {
                 <tr>
-                    <th>Дата загрузки</th>
-                    <th>Описание</th>
-                    <th>#</th>
+                    <td>@file.date</td>
+                    <td>@file.opisanie</td>
+                    <td>
+                        <a asp-action="OpenFile" asp-controller="Files" asp-route-id="@file.id_file">Смотреть</a>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var file in ViewBag.Files)
-                {
-                    <tr>
-                        <td>@file.date</td>
-                        <td>@file.opisanie</td>
-                        <td>
-                            <a asp-action="OpenFile" asp-controller="Files" asp-route-id="@file.id_file">Смотреть</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+            }
+        </tbody>
+    </table>
 </body>
 
 
@@ -108,21 +111,81 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#generateButton').click(function () {
-                $.ajax({
-                    type: 'POST',
-                    url: '@Url.Action("GenerateDocument", "Ambulatorka")',
-                    success: function (data) {
-                        alert('Документ сгенерирован успешно!');
-                    },
-                    error: function (xhr, status, error) {
-                        var errorMessage = "Произошла ошибка при генерации документа: " + error;
-                        alert(errorMessage);
-                    }
-                });
-            });
+        $("#generateButton").click(function () {
+            var form = $("#myForm").serialize();
+            //form = new FormData(form);
+            console.log(form);
+
+            GetFile(form);
         });
+
+        function GetFile(formData) {
+            $.ajax({
+                url: '/Ambulatorka/GenerateDocument', //Изменить на свой адрес
+                type: 'POST',
+                xhrFields: { responseType: 'blob' }, //Указываем что ожидаемый тип ответа blob
+                data: formData,
+                processData: false,
+                success: function (response, status, xhr) {
+                    var fileName = GetFileName(xhr);
+
+                    // Создания ссылки на файл
+                    var url = window.URL.createObjectURL(response);
+
+                    // Создание времменого тега ссылки
+                    var link = document.createElement('a');
+
+                    // Присваивания ссылки файла к тегу
+                    link.href = url;
+
+                    // Присваивания названия файла
+                    link.download = fileName;
+
+                    //Добавление тега ссылки в тег body
+                    document.body.appendChild(link);
+
+                    //Имитация нажатия на ссылку
+                    link.click();
+
+                    // Удаление временной ссылки
+                    window.URL.revokeObjectURL(url);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Произошла ошибка:', error);
+                }
+            });
+        }
+
+        //Метод возвращает имя файла со стороны сервера
+        function GetFileName(xhr) {
+            var fileName = "default_name.docx";
+
+            var contentDisposition = xhr.getResponseHeader('Content-Disposition');
+            var disposition = xhr.getResponseHeader('Content-Disposition');
+
+            if (disposition && disposition.indexOf('attachment') !== -1) {
+                var fileNameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                var matches = fileNameRegex.exec(disposition);
+
+                if (matches != null && matches[1]) {
+                    fileName = matches[1].replace(/['"]/g, '');
+                    fileName = decodeURI(fileName);
+                }
+            }
+
+            return fileName;
+        }
+
+        function saveByteArray(reportName, byte) {
+            var blob = new Blob([byte], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+            var link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            var fileName = reportName;
+            link.download = fileName;
+            link.click();
+
+            URL.revokeObjectURL(link.href);
+        };
 
         function updateTextareaHeight(textarea) {
             const scrollTop = textarea.scrollTop;
@@ -138,5 +201,29 @@
         $('textarea').on('input', function () {
             updateTextareaHeight(this);
         });
-</script>
+
+        $(document).ready(function () {
+            $('#plan_obsl, #plan_lech').keydown(function (e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+
+                    var text = $(this).val();
+                    var lines = text.split('\n');
+                    var numberedLines = '';
+                    var hasNumberedList = /^\d+\. /; // Регулярное выражение для проверки наличия номера абзаца
+
+                    for (var i = 0; i < lines.length; i++) {
+                        if (hasNumberedList.test(lines[i])) {
+                            // Пропускаем нумерацию, если строка уже начинается с номера абзаца
+                            numberedLines += lines[i] + '\n';
+                        } else {
+                            numberedLines += (i + 1) + '. ' + lines[i] + '\n';
+                        }
+                    }
+
+                    $(this).val(numberedLines);
+                }
+            });
+        });
+    </script>
 }

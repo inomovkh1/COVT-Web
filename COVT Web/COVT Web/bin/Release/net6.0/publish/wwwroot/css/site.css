@@ -1,0 +1,68 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  margin-top: -9px;
+  padding-right: 40px;
+  padding-left:40px;
+}
+
+/*body {
+  margin-bottom: 60px;
+}*/
+
+.title h1 {
+    font-family: 'Century Gothic';
+    font-size: 32px;
+    margin-bottom: 50px;
+    color: white;   
+}
+
+.list_menu a {
+    font-family: 'Century Gothic';
+    font-size: 24px;
+    border-left: 3px solid #fcfffc;
+    padding-left: 5px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: white;
+}
+
+.list_menu a:hover{
+    border-left: 2px solid #fcfffc;
+    padding-left: 10px;
+    transition: all 0.2s ease;
+}
+
+.list_menu li{
+    margin: 20px 0;
+}
+
+.menu {
+    padding: 25vh 30px;
+    position: fixed;
+    background: rgba(95, 158, 160, 0.7);
+    height: 100vh;
+    backdrop-filter: blur(16px);
+    border-right: 10px solid #5F9EA0;
+    left: -365px;
+    transition: all 0.2s ease;
+}
+
+.menu:hover {
+    left: 0;
+    transition: all 0.2s ease;
+}
+
+li{
+    list-style-type: none;
+}
